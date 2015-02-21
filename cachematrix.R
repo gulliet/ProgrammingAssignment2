@@ -7,7 +7,7 @@
 #   1) I have followed the Google's Style Guide for R, 
 #   available at https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml
 #
-#   2) Some interresting insights about how the non-local assignment operator
+#   2) Some interesting insights about how the non-local assignment operator
 #   '<<-' works can be found at 
 #   http://www.inside-r.org/r-doc/methods/ReferenceClasses
 
@@ -72,12 +72,12 @@ a.inv <- cacheSolve(a)
 #   [-2  1/2]
 #   [1  -1/2]
 a.inv
-# Now we shold see a message about the cached value
+# Now we should see a message about the cached value
 a.inv <- cacheSolve(a)
 a.inv
-# Finaly, we check that this is the correct inverse matrix indeed by
+# Finally, we check that this is the correct inverse matrix indeed by
 # using the matrix multiplication operator %*% and we expect to get
-# the 2 by 2 idendity matrix.
+# the 2 by 2 identity matrix.
 a.val %*% a.inv
-# The above line should be equivalant to a direct call to the functions:
+# The above line should be equivalent to a direct call to the functions:
 a$get() %*% cacheSolve(a)
