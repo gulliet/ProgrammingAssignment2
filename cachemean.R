@@ -23,3 +23,11 @@ cachemean <- function(x, ...) {
     x$setmean(m)
     m
 }
+
+# Some tests to check my understanding of the code above
+x <- makeVector(1:4)
+class(x)
+typeof(x)
+x$get()
+cachemean(x)
+cachemean(x)
