@@ -16,10 +16,10 @@ makeCacheMatrix <- function(mat = matrix()) {
     # thus speeding up the repeated usage of this inverse matrix.
     #
     # Args: 
-    #   x: a square invertible R matrix.
+    #   mat: a square invertible R matrix.
     #
     # Returns:
-    #   A special "matrix" object that is a list indeed.
+    #   A special "matrix" object that is a list of four elements indeed.
     
     mat.inverse <- NULL
     set <- function(m) {
@@ -41,9 +41,18 @@ cacheSolve <- function(mat, ...) {
     # otherwise, it computes it and caches it.
     #
     # Args:
-    #   x: a special "matrix" object made by makeCacheMatrix.
+    #   mat: a special "matrix" object made by makeCacheMatrix.
     #
     # Returns:
-    #   The inverse matrix of x.
+    #   The inverse matrix of mat.
     
+    mat.inverse <- mat$getinverse()
+    if(!is.null(mat.inverse)) {
+        message("getting cached inverse matrix")
+        return(mat.inverse)
+    }
+    m <- mat$get()
+    mat.inverse <- solve(m, ...)
+    mat$setinverse(mat.inverse)
+    mat.inverse
 }
