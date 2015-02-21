@@ -56,3 +56,28 @@ cacheSolve <- function(mat, ...) {
     mat$setinverse(mat.inverse)
     mat.inverse
 }
+
+# Below are some unit tests.
+# First, we create a cached 2 by 2 matrix and check its value.
+a <- makeCacheMatrix(matrix(1:4, 2, 2))
+# We expect to see the matrix
+#   [1  3]
+#   [2  4]
+a.val <- a$get()
+a.val
+# Second, we compute the inverse of 'a' for the first time: we do 
+# not expect to see any message about caching here.
+a.inv <- cacheSolve(a)
+# The inverse should be the matrix
+#   [-2  1/2]
+#   [1  -1/2]
+a.inv
+# Now we shold see a message about the cached value
+a.inv <- cacheSolve(a)
+a.inv
+# Finaly, we check that this is the correct inverse matrix indeed by
+# using the matrix multiplication operator %*% and we expect to get
+# the 2 by 2 idendity matrix.
+a.val %*% a.inv
+# The above line should be equivalant to a direct call to the functions:
+a$get() %*% cacheSolve(a)
